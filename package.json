@@ -13,6 +13,8 @@
     "@blocknote/core": "^0.41.1",
     "@blocknote/mantine": "^0.41.1",
     "@blocknote/react": "^0.41.1",
+    "@blocknote/xl-ai": "^0.41.1",
+    "ai": "^5.0.76",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0"
