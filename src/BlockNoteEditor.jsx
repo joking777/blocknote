@@ -9,18 +9,18 @@ import { BlockNoteView } from "@blocknote/mantine";
 import { createWeather, insertWeatherItem } from "./blocks/WeatherBlock";
 import "@blocknote/mantine/style.css"; // Import the stylesheet
 
-// const schema = BlockNoteSchema.create().extend({
-//   blockSpecs: {
-//     weather: createWeather(),
-//   },
-// });
+const schema = BlockNoteSchema.create().extend({
+  blockSpecs: {
+    weather: createWeather(),
+  },
+});
 
-// const getCustomSlashMenuItems = (
-//   editor,
-// ) => [
-//   ...getDefaultReactSlashMenuItems(editor),
-//   insertWeatherItem(editor),
-// ];
+const getCustomSlashMenuItems = (
+  editor,
+) => [
+  ...getDefaultReactSlashMenuItems(editor),
+  insertWeatherItem(editor),
+];
 
 function BlockNoteEditor() {
 
@@ -28,15 +28,15 @@ function BlockNoteEditor() {
   const editor = useCreateBlockNote();
   
   // Render the editor
-  return <BlockNoteView editor={editor} />
-  //   <SuggestionMenuController
-  //       triggerCharacter={"/"}
-  //       // Replaces the default Slash Menu items with our custom ones.
-  //       getItems={async (query) =>
-  //         filterSuggestionItems(getCustomSlashMenuItems(editor), query)
-  //       }
-  //     />
-  // </BlockNoteView>;
+  return <BlockNoteView editor={editor} >
+    <SuggestionMenuController
+        triggerCharacter={"/"}
+        // Replaces the default Slash Menu items with our custom ones.
+        getItems={async (query) =>
+          filterSuggestionItems(getCustomSlashMenuItems(editor), query)
+        }
+      />
+  </BlockNoteView>;
 }
 
 export default BlockNoteEditor;
