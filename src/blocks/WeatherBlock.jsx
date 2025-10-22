@@ -1,5 +1,5 @@
 import { insertOrUpdateBlock } from "@blocknote/core";
-import { createReactBlockSpec } from "@blocknote/react"
+import { createReactBlockSpec } from "@blocknote/react";
 import { HiOutlineSun } from "react-icons/hi";
 
 // https://www.blocknotejs.org/docs/features/custom-schemas/custom-blocks
@@ -11,7 +11,7 @@ export const insertWeatherItem = (editor) => ({
     insertOrUpdateBlock(editor, {
       type: "weather",
       content: [],
-      props: {forcast: "Sunny"} 
+      props: { forcast: "Sunny" },
     }),
   aliases: ["weather", "rain", "snow", "sun", "clouds"],
   group: "Other",
@@ -24,14 +24,19 @@ export const createWeather = createReactBlockSpec(
     type: "weather",
     content: "inline",
     propSchema: {
-      forecast: { default: "Rainy", values: ["Rainy", "Sunny", "Cloudy", "Snowy"] },
-    }
+      forecast: {
+        default: "Rainy",
+        values: ["Rainy", "Sunny", "Cloudy", "Snowy"],
+      },
+    },
   },
   {
     render: (props) => {
-      return <div className="weather-block">{props.block.props.forecast} weather in the forecast!</div>
-    }
-  });
-
-
-
+      return (
+        <div className="weather-block">
+          {props.block.props.forecast} weather in the forecast!
+        </div>
+      );
+    },
+  }
+);

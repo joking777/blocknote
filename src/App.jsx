@@ -1,10 +1,7 @@
-import BlockNoteEditor from "./BlockNoteEditor"
+import BlockNoteEditor from "./BlockNoteEditor";
 
 function App() {
-
-  return (
-    <BlockNoteEditor/>
-  )
+  return <BlockNoteEditor />;
 }
 
-export default App
+export default App;

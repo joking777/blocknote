@@ -3,7 +3,6 @@ import {
   FormattingToolbar,
   FormattingToolbarController,
   getDefaultReactSlashMenuItems,
-  getFormattingToolbarItems,
   SuggestionMenuController,
   useCreateBlockNote,
 } from "@blocknote/react";
@@ -21,8 +20,8 @@ import {
 import { DefaultChatTransport } from "ai";
 import "@blocknote/xl-ai/style.css";
 
-const BASE_URL = "https://localhost:3000/ai"
-  // process.env.BLOCKNOTE_AI_SERVER_BASE_URL || "https://localhost:3000/ai";
+const BASE_URL = "https://localhost:3000/ai";
+// process.env.BLOCKNOTE_AI_SERVER_BASE_URL || "https://localhost:3000/ai";
 
 const schema = BlockNoteSchema.create().extend({
   blockSpecs: {
@@ -30,22 +29,19 @@ const schema = BlockNoteSchema.create().extend({
   },
 });
 
-const getCustomSlashMenuItems = (
-  editor,
-) => [
+const getCustomSlashMenuItems = (editor) => [
   ...getDefaultReactSlashMenuItems(editor),
   insertWeatherItem(editor),
 ];
 
 function BlockNoteEditor() {
-
   // Create a new editor instance
   const editor = useCreateBlockNote({
     schema,
     dictionary: {
       ...en,
       ai: aiEn, // add default translations for the AI extension
-    },    
+    },
     extensions: [
       createAIExtension({
         transport: new DefaultChatTransport({
@@ -53,18 +49,17 @@ function BlockNoteEditor() {
           api: `${BASE_URL}/regular/streamText`,
         }),
       }),
-    ],    
-  });  
-  
+    ],
+  });
+
   // Render the editor
-  return <BlockNoteView editor={editor} 
-    formattingToolbar={false}
-    slashMenu={false}
-  >
-    <AIMenuController />
-    <FormattingToolbarWithAI />
-    <SuggestionMenuWithAI editor={editor} />
-  </BlockNoteView>;
+  return (
+    <BlockNoteView editor={editor} formattingToolbar={false} slashMenu={false}>
+      <AIMenuController />
+      <FormattingToolbarWithAI />
+      <SuggestionMenuWithAI editor={editor} />
+    </BlockNoteView>
+  );
 }
 
 // Formatting toolbar with the `AIToolbarButton` added
@@ -73,8 +68,7 @@ function FormattingToolbarWithAI() {
     <FormattingToolbarController
       formattingToolbar={() => (
         <FormattingToolbar>
-          {...getFormattingToolbarItems()}
-          {/* Add the AI button */}
+          ...getFormattingToolbarItems()
           <AIToolbarButton />
         </FormattingToolbar>
       )}
@@ -94,7 +88,7 @@ function SuggestionMenuWithAI(props) {
             // add the default AI slash menu items, or define your own
             ...getAISlashMenuItems(props.editor),
           ],
-          query,
+          query
         )
       }
     />
